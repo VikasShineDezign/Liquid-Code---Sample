@@ -1,0 +1,556 @@
+{%- style -%}
+        .pdp-list, .list-heading, .custom_reset, .total_price_custom{
+          display:none;
+        }
+        .pdp-list.active, .total_price_custom.show_cart{
+          display:block;
+        }
+
+      p.list-heading.show_cart, .custom_reset.show_cart {
+        display: block;
+    }
+  .custom_bundle_data.product_pick_more.show_cart, .product-bundle-addtocart-form {
+      display: none;
+  }
+    .custom_bundle_data.product_pick_more {
+      display: block;
+  }
+  .build_a_box-products {
+    display: none;
+}
+  .quantity-button.js-bundle-product-quantity {
+    display: none;
+}
+  #products .cstm_round-button.disable-addtocart1 {
+    display: none;
+}
+  #products .cstm_round-button {
+    display: block;
+}
+  #products .remove-pdp-main {
+    display: none;
+}
+  #products .remove-pdp-main.disable-removebtn {
+    display: block;
+}
+.message-cart-cstm {
+    display: none;
+}
+.message-cart-cstm.products-in-cart {
+    display: block;
+}
+
+         .page.bundle-page.section-{{ section.id }} {
+            padding-top: {{ section.settings.padding_top }}px;
+            padding-bottom: {{ section.settings.padding_bottom }}px;
+          }
+        @media screen and (max-width: 750px) {
+            .page.bundle-page.section-{{ section.id }} {
+               padding-top: {{ section.settings.padding_top_mob }}px;
+               padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+             }
+           }
+  /* -----------column css---------- */
+
+  .product-cards-grid.cstm-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+  .product-cards-grid.cstm-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+  .product-cards-grid.cstm-grid-4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+ .product-cards-grid.cstm-grid-5 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+}  
+ @media screen and (max-width:767px){
+   .product-cards-grid.cstm-grid-2, .product-cards-grid.cstm-grid-3, .product-cards-grid.cstm-grid-4,  .product-cards-grid.cstm-grid-5 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+} 
+   @media screen and (max-width:991px){
+  .product-cards-grid.cstm-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+  .product-cards-grid.cstm-grid-3, .product-cards-grid.cstm-grid-4,  .product-cards-grid.cstm-grid-5 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+   }
+ } 
+{%- endstyle -%}
+
+<div class="container-fluid bundle-page section-{{ section.id }}">
+  <div class="page-section">
+    <div class="grid layout-wrapper">
+     
+      <div class="grid__item bundle-product-container">
+          <div class='main-heading-wrapper'>
+          <h2 class='heading-main'>{{ section.settings.heading }}</h2>
+            <div class="cstm-collection-sort-elements">
+              <span class="total-products">Products {{ section.settings.collection_clc.products_count }}</span>
+          
+              <button href="" class="sort-grid-icon" data-value="grid-layout-2">
+                <svg viewBox="0 0 10 12" width="10" height="12">
+                  <path  d="m0 0h3v12h-3z" />
+                  <path  d="m7 0h3v12h-3z" />
+                </svg>
+              </button>
+              <button href="" class="sort-grid-icon" data-value="grid-layout-3">
+                <svg viewBox="0 0 15 12" width="15" height="12">
+                  <path  d="m0 0h3v12h-3z" />
+                  <path  d="m6 0h3v12h-3z" />
+                  <path  d="m12 0h3v12h-3z" />
+                </svg>
+              </button>
+              <button href="" class="sort-grid-icon active" data-value="grid-layout-4">
+                <svg viewBox="0 0 21 12" width="21" height="12">
+                  <g/><g><g><path d="M0,0H3V12H0V0Z"/><path d="M6,0h3V12h-3V0Z"/><path d="M12,0h3V12h-3V0Z"/><path d="M18,0h3V12h-3V0Z"/></g></g>
+                </svg>
+              </button>
+              <button href="" class="sort-grid-icon" data-value="grid-layout-5">
+                <svg viewBox="0 0 27 12" width="27" height="12">
+                  <g/><g><g><path d="M0,0H3V12H0V0Z"/><path d="M6,0h3V12h-3V0Z"/><path d="M12,0h3V12h-3V0Z"/><path d="M18,0h3V12h-3V0Z"/><path d="M24,0h3V12h-3V0Z"/></g></g>
+                </svg>
+              </button>
+            </div>
+        </div>
+        <div id="products" class="product-cards-grid cstm-grid-4">
+          {% for product in collections[section.settings.collection_clc].products %}
+           
+          <div class="grid-items" data-product-grid>
+                    {%- liquid
+                render 'product-grid-2', product: product, index: forloop.index0
+                    -%}
+                  </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="grid__item content-card">
+      <div class="copy-wrapper">
+          <div class="bundle-description">
+            <h2>{{ section.settings.content }}</h2>
+          </div>
+          <div class="bundle-summary-list-wrapper">
+            <p class="list-heading"></p>
+            <ul class="bundle_data">
+              <div class="build_a_box-products" data-count="0">
+                {% for product in collections[section.settings.collection_clc].products %}
+                  <li class="pdp-list build_{{forloop.index0 }}">
+                    {% render 'card-bundle-pdp' with product as product, index: forloop.index0 %}
+                  </li>
+                {% endfor %}
+              </div>
+              <div class="reset_main">
+               <div class="custom_bundle_data-img">
+                 <div id="custom-img-1" class='main-wrapper-images off-wrapper-box'></div>
+                 <div id="custom-img-2" class='main-wrapper-images off-wrapper-box'>
+                   <div class="main_fifteen_outer">
+                   <div class="svg-cart-icon">{% render 'cart-svg' %}</div>
+                   <div class="fifteen-percent-off">10% OFF</div>
+                   </div>
+                 </div>
+                 <div id="custom-img-3" class='main-wrapper-images off-wrapper-box'>
+                   <div class="main_fifteen_outer">
+                   <div class="svg-cart-icon">{% render 'cart-svg' %}</div>
+                   <div class="fifteen-percent-off">15% OFF</div>
+                   </div>
+                 </div>
+                 <div id="custom-img-4" class='main-wrapper-images off-wrapper-box'>
+                   <div class="main_fifteen_outer">
+                   <div class="svg-cart-icon">{% render 'cart-svg' %}</div>
+                   <div class="fifteen-percent-off">20% OFF</div>
+                   </div>
+                 </div>
+               </div>
+                 <div class="custom_wrapper_bundle-message">
+                <div class="message-cart-cstm">You already have a bundle in your cart, please remove it before adding a new one.</div>
+                 </div>
+                <div class="custom_wrapper_bundle">
+                  <div class="custom_bundle_data product__bundle--addtocart disable-addtocart">Add To Cart</div>
+                  
+                </div>
+              </div>
+            </ul>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(window).on("load", function() {
+    $(".product_bundle_section .js-qty__num").val('0');
+  });
+  $('.product_bundle_section .product__bundle--addtocart').click(function(){
+    $('.custom_wrapper_bundle.show_cart').addClass('add_cart_disable_wrapper');
+      $(".layout-wrapper .grid__item.content-card .copy-wrapper .custom_wrapper_bundle.show_cart.add_cart_disable_wrapper").css({"background":"#f2f2f2","pointer-events":"none","cursor":"none"})
+    $('.loading__spinner.hidden').removeClass('hidden');
+    });
+</script>
+
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+          var counter = 0;
+          $('.js-qty__adjust').click(function(){
+            var checkchange = $(this).attr('data-qty');
+
+            var price = $(this).attr("product_price");
+            console.log(price);
+            var abcd= parseFloat(price);
+            console.log(abcd);
+            var total_price = $('.total_price_custom').text();
+            console.log(total_price);
+            var abc= parseFloat(total_price);
+             console.log(total_price);
+            var previnput =  parseInt($(this).parent().find('.js-qty__num').val());
+            // console.log(previnput);
+            var totalcount = parseInt($('.build_a_box-products').attr('data-count'));
+
+            if(checkchange == 'dec' && previnput > 0){
+              var newinput = previnput - 1;
+              var totalcount = totalcount - 1;
+              $(this).parent().find('.js-qty__num').val(parseInt(newinput));
+              $(this).parents('.build_a_box-products').attr('data-count', totalcount );
+              if(newinput == 0){
+                var title_class = $(this).attr('pdp_title');
+                $('.build_a_box-products li.pdp-list.'+title_class).removeClass("active");
+              }
+              console.log("dec_data_inc" + newinput);
+               console.log("dec_data_dec"+ totalcount);
+              var pre_price = (abc - abcd);
+            var final_price =((pre_price).toFixed(2))
+            console.log("updated price"+final_price)
+           $('.total_price_custom').text(final_price);
+
+            }else if(checkchange == 'inc'){
+              var newinput = previnput + 1;
+              var totalcount = totalcount + 1;
+              counter = totalcount;
+              $(this).parent().find('.js-qty__num').val(parseInt(newinput));
+              $(this).parents('.build_a_box-products').attr('data-count',totalcount);
+              console.log("inc_total" +newinput);
+               console.log("increment" +totalcount);
+              var pre_price = (abc + abcd);
+            var final_price =((pre_price).toFixed(2))
+            console.log("updated price"+final_price);
+           $('.total_price_custom').text(final_price);
+            }
+           if(totalcount == 0){
+              console.log('count 0');
+             $('.custom_bundle_data-img .main-wrapper-images').removeClass('hide-wrapper');
+            }
+            if(totalcount == 1){
+              console.log('count 1');
+              $('.custom_bundle_data-img #custom-img-1').addClass('hide-wrapper');
+              $('.custom_bundle_data-img #custom-img-2').removeClass('hide-wrapper');
+              $('.custom_bundle_data-img #custom-img-3').removeClass('hide-wrapper');
+              $('.custom_bundle_data-img #custom-img-4').removeClass('hide-wrapper');
+              $('button.cstm_round-button').removeClass('disable-addtocart');
+              $('.custom_wrapper_bundle, .total_price_custom').removeClass('show_cart');
+               $('.js-qty__adjust.js-qty__adjust--plus').removeClass('disable_count_btn');
+              $('.product_bundle_section .grid__item.content-card .bundle-description h2').text("Add more to unlock 10% off");
+            }
+            if(totalcount == 2){
+              console.log('count 2');
+              $('.custom_bundle_data-img #custom-img-2').addClass('hide-wrapper');
+              $('.custom_bundle_data-img #custom-img-3').removeClass('hide-wrapper');
+              $('.custom_bundle_data-img #custom-img-4').removeClass('hide-wrapper');
+              $('button.cstm_round-button').removeClass('disable-addtocart');
+              $('.custom_wrapper_bundle, .total_price_custom').removeClass('show_cart');
+               $('.js-qty__adjust.js-qty__adjust--plus').removeClass('disable_count_btn');
+              $('.product_bundle_section .grid__item.content-card .bundle-description h2').text("Saving 10% on your bundle");
+            }
+            if(totalcount == 3){
+              console.log('count 3');
+              $('.custom_bundle_data-img #custom-img-3').addClass('hide-wrapper');
+              $('.custom_bundle_data-img #custom-img-4').removeClass('hide-wrapper');
+              $('button.cstm_round-button').removeClass('disable-addtocart');
+               $('.custom_wrapper_bundle, .total_price_custom').addClass('show_cart');
+              $('.js-qty__adjust.js-qty__adjust--plus').addClass('disable_count_btn');
+               $(".custom_bundle_data-img .main-wrapper-images.img-wrapper-box:last").removeClass("intro-last");
+              $('.product_bundle_section .grid__item.content-card .bundle-description h2').text("Saving 15% on your bundle!");
+            }
+            if(totalcount == 4){
+              console.log('count 4');
+             $('.custom_bundle_data-img #custom-img-4').addClass('hide-wrapper');
+               $('button.cstm_round-button').addClass('disable-addtocart');
+               $(".custom_bundle_data-img .main-wrapper-images.img-wrapper-box:last").addClass("intro-last");
+              $('.product_bundle_section .grid__item.content-card .bundle-description h2').text("Saving 20% on your bundle!");
+            }
+            
+            if(totalcount >= 1 ){
+               $('.custom_reset, .list-heading').addClass('show_cart');
+            }else{
+              $('.custom_reset, .list-heading').removeClass('show_cart');
+             }
+            var pdp_text = 4-totalcount;
+            $('p.list-heading.show_cart').text("Total " + totalcount+" product selected");
+        });
+          
+ $('.product__bundle--addtocart').on('click', function(){
+             $("form").each(function() {
+      $(this).on("submit", function(e) {
+          if(!$(this).hasClass("submitted")) {
+              var form = $(this);
+              setTimeout(function() {
+                  form.submit();
+              }, 1000);
+              var data = $(this).serialize();
+              $(this).addClass("submitted");
+          }
+      });
+  });
+            
+            if(counter > 0){
+              $(this).addClass('loading');
+              $(this).parents('.custom_wrapper_bundle').addClass('show-open');
+              
+              $(this).parents('.custom_wrapper_bundle').find('.loading__spinner').removeClass('hidden');
+            $('.build_a_box-products .build_a_box-product').each(function(){
+              var num = $(this).find('.js-qty__num').val();
+              if(num > 0){
+                var form = $(this).find('form');
+                console.log(form + 'qdtata');
+                $.ajax({
+                  type: "POST",
+                  async: false,
+                  cache: false,
+                  url: "/cart/add.js",
+                  dataType: "json",
+                  data: $(form).serialize(),
+                  success: () => {
+                   window.location.href = '/cart';
+                    console.log('successful');
+                    
+                    // $('#cart-icon-bubble').trigger('click');
+                    // $('.cart-drawer').removeClass('is-empty');
+                    // $('.drawer__inner-empty').hide();
+                    // $('cart-drawer').load(location.href + '#CartDrawer');
+                    // $('#cart-icon-bubble').load(location.href + ' #cart-icon-bubble');
+                  },
+                  error: function(xhr, ajaxOption, thrownError) {
+                    console.log(xhr);
+                  },
+               });
+
+            }
+          });
+        }else{
+           alert('Please select the products..');
+        	}
+        });
+
+        });
+ 
+    $(".remove-pdp").click(function(){
+console.log('wkjldnw');
+      var li_list = $('.pdp-list.active').length;
+console.log(li_list);
+       if(li_list == 1){
+$('.card.bundle-product-card').css('display','block');
+  }
+    let getvar_id = $(this).attr('pdp-id');
+      let pdp_bundle = $(this).attr('bundle-id');
+    console.log(getvar_id +'aaaaaaaa');
+   $('#'+getvar_id).trigger('click');
+      $('#'+ pdp_bundle).removeClass('disable-addtocart1');
+  });
+    $(".remove-pdp-main").click(function(){
+console.log('qqqqwkjldnw')
+      var li_list = $('.pdp-list.active').length;
+console.log(li_list);
+       if(li_list == 1){
+$('.card.bundle-product-card').css('display','block');
+  }
+      $(this).removeClass('disable-removebtn');
+      let getvar_id = $(this).attr('pdp-id');
+      let pdp_bundle = $(this).attr('bundle-id');
+    console.log(getvar_id +'sdsff');
+   $('#'+getvar_id).trigger('click');
+      $('#'+ pdp_bundle).removeClass('disable-addtocart1');
+var pdp_tag_id = $(this).attr('pdp_tag_id');
+      $('.custom_bundle_data-img #'+pdp_tag_id).remove();
+  });
+  
+    $("button.cstm_round-button").click(function(){
+        var title_tag = $(this).attr('pdp_tag');
+      $(this).addClass('disable-addtocart1');
+      var div_id = $(this).attr('id');
+      $(".remove-pdp-main."+div_id).addClass('disable-removebtn');
+        $( ".js-qty__adjust--plus."+title_tag ).trigger( "click" );
+        $('.build_a_box-products li.pdp-list.'+title_tag).addClass("active");
+    });
+
+  // ------close btn------- with images
+  $("button.cstm_round-button").click(function(){
+        var title_url = $(this).attr('img_url');
+      var tag_id = $(this).attr('pdp_tag');
+    var bundle_pdp_id = $(this).attr('id');
+    var pdp_id = $(this).attr('product-id');
+   var data_pdp_id = $(this).attr('data-variant');
+      $(".custom_bundle_data-img").prepend('<div id='+tag_id+' product_main_id = "' +data_pdp_id+ '" class="main-wrapper-images img-wrapper-box"></div>');
+     $(".custom_bundle_data-img #"+tag_id).prepend($('<img>',{class:tag_id,src:title_url}));
+      $(".custom_bundle_data-img #"+tag_id).prepend('<div class="remove-pdp ht-'+tag_id+'" data-main-tag='+tag_id+' bundle_id ='+bundle_pdp_id+'  pdp-id = minu-quantity-'+pdp_id+'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg></div>');
+    // -- pdp varient id set in cookie  
+    var pdp_title_id = '';
+localStorage.setItem("search_cookie0",'');
+localStorage.setItem("search_cookie1",'');
+localStorage.setItem("search_cookie2",'');
+localStorage.setItem("search_cookie3",'');
+     $( ".product_bundle_section .main-wrapper-images.img-wrapper-box" ).each(function(index) {
+         var length = $('.product_bundle_section .main-wrapper-images.img-wrapper-box').length;
+         console.log(length);
+      pdp_title_id =+$(this).attr('product_main_id');
+         console.log(pdp_title_id);
+          localStorage.setItem("search_cookie"+index, pdp_title_id);
+   });
+
+
+    
+      $(".custom_bundle_data-img .remove-pdp").click(function(){
+        var remove_div = $(this).attr('data-main-tag');
+        var bundle_ids = $(this).attr('bundle_id');
+        $('.remove-pdp-main.'+bundle_ids).removeClass('disable-removebtn');
+      $('.custom_bundle_data-img #'+remove_div).remove();
+
+        let getvar_id2 = $(this).attr('pdp-id');
+      let pdp_bundle = $(this).attr('bundle_id');
+        console.log(getvar_id2);
+       console.log(pdp_bundle);
+       $('#'+getvar_id2).trigger('click');
+      $('#'+ pdp_bundle).removeClass('disable-addtocart1');
+    });
+    });
+  
+   $(".cstm-collection-sort-elements button.sort-grid-icon").click(function(){
+        $('.cstm-collection-sort-elements button.sort-grid-icon').removeClass('active');
+      $(this).addClass('active');
+    var data_value =  $(this).attr('data-value');
+      if(data_value == 'grid-layout-2'){
+          $('.product_bundle_section .product-cards-grid').addClass('cstm-grid-2');
+          $('.product_bundle_section .product-cards-grid').removeClass('cstm-grid-3');
+          $('.product_bundle_section .product-cards-grid').removeClass('cstm-grid-4');
+          $('.product_bundle_section .product-cards-grid').removeClass('cstm-grid-5');
+      }
+       if(data_value == 'grid-layout-3'){
+           $('.product_bundle_section .product-cards-grid').addClass('cstm-grid-3');
+           $('.product_bundle_section .product-cards-grid').removeClass('cstm-grid-2');
+          $('.product_bundle_section .product-cards-grid').removeClass('cstm-grid-4');
+          $('.product_bundle_section .product-cards-grid').removeClass('cstm-grid-5');
+      }
+       if(data_value == 'grid-layout-4'){
+           $('.product_bundle_section .product-cards-grid').addClass('cstm-grid-4');
+           $('.product_bundle_section .product-cards-grid').removeClass('cstm-grid-3');
+          $('.product_bundle_section .product-cards-grid').removeClass('cstm-grid-2');
+          $('.product_bundle_section .product-cards-grid').removeClass('cstm-grid-5');
+      }
+       if(data_value == 'grid-layout-5'){
+           $('.product_bundle_section .product-cards-grid').addClass('cstm-grid-5');
+           $('.product_bundle_section .product-cards-grid').removeClass('cstm-grid-3');
+          $('.product_bundle_section .product-cards-grid').removeClass('cstm-grid-4');
+          $('.product_bundle_section .product-cards-grid').removeClass('cstm-grid-2');
+      }
+    
+    });       
+  if ($(window).width() < 991) {
+    $('.cstm-collection-sort-elements .sort-grid-icon[data-value="grid-layout-3"]').trigger('click');
+  }
+   if ($(window).width() < 767) {
+    $('.cstm-collection-sort-elements .sort-grid-icon[data-value="grid-layout-2"]').trigger('click');
+  }
+
+</script>
+
+{% schema %}
+{
+  "name": "Product Bundle",
+  "class": "product_bundle_section",
+  "settings": [
+    {
+      "type":"text",
+      "id":"heading",
+      "label":"Heading"
+    },
+    {
+      "type":"text",
+      "id":"content",
+      "label":"Content"
+    },
+    {
+      "label": "collection",
+      "id": "collection_clc",
+      "type": "collection"
+    },
+        {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    },
+
+     {
+      "type": "header",
+      "content": "Mobile Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mob",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+     "name": "Product Bundle"
+    }
+  ]
+}
+{% endschema %}

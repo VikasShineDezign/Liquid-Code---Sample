@@ -1,0 +1,71 @@
+$(document).ready(function () { 
+  // calculator for fecncing panel in linear 
+   
+  $('.custom-length').on('input', function(){ 
+      // Get quantity and price per unit from the product data or calculate dynamically 
+      var quantity = $(this).val(); 
+      var find_price = $(this).attr('custom-price'); 
+      var price_parts = find_price.split("$"); 
+       if(price_parts.length > 1) { 
+          find_price = price_parts[1]; // Take the number after $ 
+      } 
+ 
+      // Calculate total price 
+      var totalPrice = quantity / find_price; 
+ 
+        var roundprice = Math.round(totalPrice); 
+      // Update the price per unit field 
+       $('.response-custom-length').css('display','block').text('You Will Need to Buy the Following Number of Panels: '+roundprice + ' Panels');  
+  }); 
+  // end  
+   
+  // calculator for installation price 
+   
+    var inst_price = parseFloat($('.installation-price-calculator').find('.installation-price').text().replace('$', '')); 
+    var triggeroption = $('.installation-price-calculator').find('.installation-price').attr('var-option'); 
+  var final_opt = triggeroption.split("x "); 
+        if(final_opt.length > 1) { 
+            triggeroption = parseFloat(final_opt[1]); // Take the number after x 
+        } 
+   var total_ins_price = inst_price * triggeroption; 
+   $('.installation-price-calculator').find('.installation-price').text("$"+total_ins_price); 
+   
+    $('.single-option-selector').on('change', function() { 
+        var selectedoption = $(this).val(); 
+        var triggeroption = parseFloat($(this).closest('form').find('.installation-price-calculator').find('.installation-price').attr(selectedoption)); 
+         
+        var final_option = selectedoption.split("x "); 
+        if(final_option.length > 1) { 
+            triggeroption = parseFloat(final_option[1]); // Take the number after x 
+        } 
+       console.log(triggeroption); 
+        var total_ins_price = inst_price * triggeroption; 
+        $('.installation-price-calculator').find('.installation-price').text("$"+total_ins_price); 
+    }); 
+   
+ // end 
+}); 
+  // calculator for roof and wall coverage 
+        $(document).ready(function() { 
+          // Bind click event to #calculator-area 
+          $('#calculator-area').on('click', function(){ 
+              console.log('aaa'); 
+              var main_get = $(this).parent('.custom-area-wrapper').find('.wrap_custom_area'); 
+              var input_width = main_get.find('.custom-area-width').val(); 
+              var input_length = main_get.find('.custom-area-length').val(); 
+              console.log(input_width); 
+              console.log(input_length); 
+              var area = input_width * input_length; 
+              console.log(area); 
+              var roof = main_get.attr('roof-coverage'); 
+              var wall = main_get.attr('wall-coverage'); 
+              console.log(roof); 
+              console.log(wall); 
+              var final_roof = area / roof; 
+              var final_wall = area / wall; 
+             var roundprice_roof = Math.round(final_roof); 
+             var roundprice_wall = Math.round(final_wall); 
+              $('.response-for-roof').css('display','block').text('For '+ area+' sq feet Area You Will Need to Buy the Following Number of Panels for Roof: '+roundprice_roof + ' Panels');  
+              $('.response-for-wall').css('display','block').text('For '+ area+'sq feet Area You Will Need to Buy the Following Number of Panels for Wall: '+roundprice_wall + ' Panels');  
+          }); 
+        });

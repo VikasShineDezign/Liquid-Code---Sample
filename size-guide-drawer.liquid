@@ -1,0 +1,25 @@
+if($('.section-guide-care').length > 0){ 
+   // Show popup when clicking on '.guide-content-blocks' 
+  $('.guide-content-blocks').click(function(){ 
+     $('body').addClass('pop-show'); 
+  $(this).parents('.guide-care-inner').find('.guide-drawer-blocks').addClass('show'); 
+  }); 
+
+  // Hide popup when clicking on '.cross-btn' 
+  $('.cross-btn').click(function(){ 
+    $(this).parents('.guide-care-inner').find('.guide-drawer-blocks').removeClass('show'); 
+       $('body').removeClass('pop-show'); 
+
+  }); 
+
+    
+
+   // Hide popup when clicking anywhere on the body 
+
+  $('body').click(function(event){ 
+    if(!$(event.target).closest('.guide-content-blocks').length && !$(event.target).closest('.cross-btn').length) { 
+      $('.guide-drawer-blocks').removeClass('show'); 
+      $('body').removeClass('pop-show'); 
+    } 
+  }); 
+}
